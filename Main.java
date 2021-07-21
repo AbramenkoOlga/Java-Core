@@ -1,0 +1,67 @@
+package Homework2;
+
+public class Main {
+    public static int arraySum(String[][] twoDimensionalArray) throws MyArraySizeException, MyArrayDataException {
+        if (twoDimensionalArray.length != 4) {
+            throw new MyArraySizeException("Длина массива не равна 4");
+        }
+
+        for (String[] array : twoDimensionalArray) {
+            if (array.length != 4) {
+                throw new MyArraySizeException("Высота  массива не равна 4");
+            }
+        }
+
+        int sum = 0;
+        for (int i = 0; i < twoDimensionalArray.length; i++) {
+            for (int j = 0; j < twoDimensionalArray[i].length; j++) {
+                try {
+                    sum += Integer.parseInt(twoDimensionalArray[i][j]);
+                } catch (NumberFormatException e) {
+                    throw new MyArrayDataException("Не число в элементе:" + i + "," + j);
+                }
+            }
+        }
+        return sum;
+    }
+
+    public static void main(String[] args) {
+        String[][] successArray =
+                {{"1", "2", "3", "4"},
+                        {"1", "2", "3", "4"},
+                        {"1", "2", "3", "4"},
+                        {"1", "2", "3", "4"}};
+
+        try {
+            System.out.println(arraySum(successArray));
+        } catch (MyArraySizeException e) {
+            e.printStackTrace();
+        } catch (MyArrayDataException e) {
+            e.printStackTrace();
+        }
+
+        String[][] invalidDataArray =
+                {{"1", "2", "3", "4"},
+                        {"1", "2", "3", "4"},
+                        {"1", "2g", "3", "4"},
+                        {"1", "2", "3", "4"}};
+
+        try {
+            System.out.println(arraySum(invalidDataArray));
+        } catch (MyArraySizeException e) {
+            e.printStackTrace();
+        } catch (MyArrayDataException e) {
+            e.printStackTrace();
+        }
+    }
+    /* 1	Напишите метод, на вход которого подаётся двумерный строковый массив размером 4х4.
+    При подаче массива другого размера необходимо бросить исключение MyArraySizeException.
+2	Далее метод должен пройтись по всем элементам массива, преобразовать в int и просуммировать.
+Если в каком-то элементе массива преобразование не удалось
+(например, в ячейке лежит символ или текст вместо числа),
+должно быть брошено исключение MyArrayDataException с детализацией,
+в какой именно ячейке лежат неверные данные.
+3	В методе main() вызвать полученный метод, обработать возможные
+исключения MyArraySizeException и MyArrayDataException и вывести результат расчета.
+*/
+}
