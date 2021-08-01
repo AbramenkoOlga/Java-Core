@@ -1,16 +1,15 @@
-package Homework3;
+package Homework5;
 
 import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
+        AppData appData = new AppData();
+        appData.load("hw5.txt");
 
-    }
+        System.out.println(Arrays.toString(appData.getHeader()));
+        System.out.println(Arrays.deepToString(appData.getData()));
 
-    public static void changeArrElements(Object[] array, int a, int b){
-        System.out.println(Arrays.toString(array));
-        Object tmp = array[a];
-        array[a] = array[b];
-        array[b] = tmp;
+        appData.save("hw5_1.txt");
     }
 }
